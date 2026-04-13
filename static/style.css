@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #141e30, #243b55);
+    color: white;
+    text-align: center;
+}
+
+.container {
+    margin-top: 80px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Mic button */
+.mic-btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    background: #00c6ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.mic-btn:hover {
+    background: #0072ff;
+}
+
+.mic-btn:active,
+.mic-btn.listening {
+    background: #ff0066;
+    transform: scale(0.98);
+}
+
+/* Status line */
+#status {
+    margin-top: 10px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* Chat / Response box */
+.box {
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.box h3 {
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.box p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Help box */
+.help-box {
+    margin-top: 25px;
+    padding: 10px 15px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+/* Typing animation */
+.typing {
+    display: inline-block;
+}
+.typing:after {
+    content: '.';
+    animation: dots 1.5s steps(5, end) infinite;
+}
+@keyframes dots {
+    0%, 20% { content: '.';  }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}

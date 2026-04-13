@@ -1,0 +1,4 @@
+flask
+groq
+pyttsx3
+streamlit
