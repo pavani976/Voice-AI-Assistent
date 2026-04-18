@@ -7,33 +7,29 @@ import os
 import re
 from googlesearch import search
 from dotenv import load_dotenv
-
-# Load environment variables
 load_dotenv()
 app = Flask(__name__)
 
-# OpenAI Setup
 openai.api_key = os.getenv('OPENAI_API_KEY')
 GPT_AVAILABLE = bool(openai.api_key)
-
-# TTS Setup
 try:
     engine = pyttsx3.init()
     engine.setProperty('rate', 170)
     TTS_AVAILABLE = True
 except:
     TTS_AVAILABLE = False
-
 def speak(text):
     if TTS_AVAILABLE:
-        engine.say(text)
-        engine.runAndWait()
+        try:
+            engine.stop()  # Prevent overlapping speech
+            engine.say(text)
+            engine.runAndWait()
+        except RuntimeError:
+            print("TTS loop issue, skipping...")
 
 def smart_action(command):
     """Detect websites/apps and open them intelligently"""
     command_lower = command.lower()
-    
-    # Direct websites
     websites = {
         "youtube": "https://youtube.com",
         "google": "https://google.com", 
@@ -46,6 +42,14 @@ def smart_action(command):
         "twitter": "https://x.com",
         "netflix": "https://netflix.com"
     }
+    # Play songs on YouTube
+    if "song" in command_lower or "play" in command_lower:
+        query = command.replace("play", "").replace("song", "").strip()
+        if not query:
+            query = command
+        url = f"https://www.youtube.com/results?search_query={query}"
+        webbrowser.open(url)
+        return f"Playing {query} on YouTube!"
     
     for site, url in websites.items():
         if site in command_lower:
@@ -143,4 +147,5 @@ def command():
 if __name__ == "__main__":
     print("🤖 Siri-like Voice Assistant starting...")
     print("💡 Say: 'Open YouTube', 'What is AI?', 'What time?', 'Search Python'...")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000, use_reloader=False)

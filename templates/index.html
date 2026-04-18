@@ -6,33 +6,28 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-
+<div class="wrapper">
 <div class="container">
-
     <h1>🎙️ AI Voice Assistant</h1>
-
-    <!-- Mic button -->
     <button id="micBtn" class="mic-btn">
         🎤 Speak Now
     </button>
-
-    <!-- Status line -->
     <p id="status">Click the button and speak</p>
-
-    <!-- Chat / Response box -->
     <div class="box" id="chatBox">
         <h3>💬 Assistant says:</h3>
         <p id="response"></p>
     </div>
+</div>
+<div class="image-side">
 
-    <!-- Help section -->
-    <div class="help-box">
-        <h3>💡 You can say:</h3>
-        <p>“What time is it?” / “Open YouTube” / “Open Google” / “Open WhatsApp” / “Open LinkedIn” / “Open GitHub”, etc.</p>
-    </div>
+    <!-- 🌊 Wave Canvas -->
+    <canvas id="waveCanvas"></canvas>
+
+    <!-- 🤖 AI Image -->
+    <img src="/static/assistant.png" id="aiImage">
 
 </div>
-
+</div>
 <script src="/static/script.js"></script>
 </body>
 </html>

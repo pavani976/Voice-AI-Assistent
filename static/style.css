@@ -1,80 +1,85 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #141e30, #243b55);
+    font-family: 'Segoe UI', sans-serif;
     color: white;
     text-align: center;
+    background: radial-gradient(circle at center, #2b1055, #0f0c29, #000);
 }
-
 .container {
     margin-top: 80px;
+    margin-left: 80px;
 }
-
 h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
+    font-size: 40px;
+    margin-bottom: 40px;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, #00c6ff, #ff00cc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-
-/* Mic button */
 .mic-btn {
-    padding: 15px 30px;
-    font-size: 18px;
+    padding: 18px 40px;
+    font-size: 20px;
     border: none;
     border-radius: 50px;
-    background: #00c6ff;
-    color: white;
     cursor: pointer;
+    background: linear-gradient(45deg, #00c6ff, #ff00cc);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 0, 200, 0.6);
     transition: 0.3s;
 }
-
 .mic-btn:hover {
-    background: #0072ff;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 0, 200, 0.9);
 }
-
-.mic-btn:active,
 .mic-btn.listening {
-    background: #ff0066;
-    transform: scale(0.98);
+    background: linear-gradient(45deg, #ff0066, #ff00cc);
+    box-shadow: 0 0 40px rgba(255, 0, 100, 1);
+    animation: pulse 1s infinite;
 }
-
-/* Status line */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
 #status {
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 16px;
-    opacity: 0.9;
+    opacity: 0.8;
 }
-
-/* Chat / Response box */
 .box {
-    margin-top: 25px;
-    padding: 15px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 10px;
-    max-height: 200px;
+    margin: 30px auto;
+    padding: 20px;
+    width: 60%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-height: 250px;
     overflow-y: auto;
 }
-
 .box h3 {
-    margin-bottom: 8px;
+    margin-bottom: 13px;
     font-size: 16px;
+    opacity: 0.8;
 }
-
 .box p {
     margin: 0;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.5;
 }
-
-/* Help box */
 .help-box {
-    margin-top: 25px;
-    padding: 10px 15px;
-    background: rgba(0,0,0,0.2);
-    border-radius: 10px;
+    margin: 20px auto;
+    padding: 12px 20px;
+    width: 60%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
     font-size: 14px;
+    opacity: 0.85;
 }
-
-/* Typing animation */
 .typing {
     display: inline-block;
 }
@@ -83,7 +88,111 @@ h1 {
     animation: dots 1.5s steps(5, end) infinite;
 }
 @keyframes dots {
-    0%, 20% { content: '.';  }
+    0%, 20% { content: '.'; }
     40% { content: '..'; }
     60%, 100% { content: '...'; }
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 0 60px;
+}
+#waveCanvas {
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    z-index: 0;
+}
+.image-side {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#aiImage {
+    width: 320px;
+    position: relative;
+    z-index: 1;
+    transition: 0.1s ease;
+    filter: drop-shadow(0 0 15px #ff00cc);
+    width: 320px;
+    height: 320px;
+    border-radius: 170px;
+}
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+.glow {
+    animation: glowPulse 1s infinite alternate;
+}
+@keyframes glowPulse {
+    from { filter: drop-shadow(0 0 10px #ff00cc); }
+    to { filter: drop-shadow(0 0 35px #00c6ff); }
+}
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        height: auto;
+    }
+    .container {
+        margin: 40px 0 20px 0;
+    }
+    h1 {
+        font-size: 32px;
+    }
+    .box, .help-box {
+        width: 85%;
+    }
+    .image-side {
+        width: 100%;
+        margin-top: 20px;
+    }
+    #aiImage {
+        width: 250px;
+    }
+    #waveCanvas {
+        width: 300px;
+        height: 150px;
+    }
+}
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+    .mic-btn {
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+    #status {
+        font-size: 14px;
+    }
+    .box {
+        width: 95%;
+        padding: 15px;
+    }
+    .help-box {
+        width: 95%;
+        font-size: 12px;
+    }
+    #aiImage {
+        width: 180px;
+    }
+    #waveCanvas {
+        width: 220px;
+        height: 120px;
+    }
 }
