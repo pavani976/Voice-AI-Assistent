@@ -9,7 +9,6 @@ from googlesearch import search
 from dotenv import load_dotenv
 load_dotenv()
 app = Flask(__name__)
-
 openai.api_key = os.getenv('OPENAI_API_KEY')
 GPT_AVAILABLE = bool(openai.api_key)
 try:
@@ -147,5 +146,7 @@ def command():
 if __name__ == "__main__":
     print("🤖 Siri-like Voice Assistant starting...")
     print("💡 Say: 'Open YouTube', 'What is AI?', 'What time?', 'Search Python'...")
-    # app.run(debug=True, host='0.0.0.0', port=5000)
-    app.run(debug=True, host='0.0.0.0', port=5000, use_reloader=False)
+
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True, use_reloader=False)
+    
